@@ -1,10 +1,25 @@
 import React from 'react';
+import { CssBaseline, Grid } from '@material-ui/core';
+
+import TopBar from './components/TopBar/TopBar';
+import Map from './components/Map/Map';
+import List from './components/List/List';
+import Details from './components/Details/Details';
 
 const App = (): JSX.Element =>  {
     return (
-        <div>
-            <h1>Hello There</h1>
-        </div>
+        <>
+            <CssBaseline />
+            <TopBar />
+            <Grid container spacing={3} style={{width: '100%'}}>
+                <Grid item xs={12} md={4}>
+                    <List />
+                </Grid>
+                <Grid item xs={12} md={8}>
+                    <Map />
+                </Grid>
+            </Grid>
+        </>
     )
 }
 
