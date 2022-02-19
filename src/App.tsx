@@ -1,12 +1,19 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
 
 import TopBar from './components/TopBar/TopBar';
 import Map from './components/Map/Map';
 import List from './components/List/List';
-import Details from './components/Details/Details';
+import {getPlaces} from './api/index';
+import {IPlace} from './models/interfaces';
 
 const App = (): JSX.Element =>  {
+    const [places, setPlaces] = useState<IPlace[]>([]);
+
+    useEffect(() => {
+        getPlaces().then(res => setPlaces(res));
+    }, []);
+
     return (
         <>
             <CssBaseline />

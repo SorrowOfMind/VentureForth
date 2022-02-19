@@ -6,3 +6,11 @@ export interface ICoordinates {
 export interface ISpot {
     name: string
 }
+
+
+export interface IPlace {
+    location_id: string,
+    name: string,
+    latitude: string,
+    longitute: string
+}

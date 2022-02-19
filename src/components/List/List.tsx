@@ -44,7 +44,7 @@ const List = (): JSX.Element => {
             <Grid container spacing={3} className={classes.list}>
                 {spots?.map((spot, idx) => (
                     <Grid item key={idx} xs={12}>
-                        <Details spot={spot} />
+                        <Details {...spot} />
                     </Grid>
                 ))}
             </Grid>

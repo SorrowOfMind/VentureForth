@@ -1,10 +1,10 @@
 import React from 'react'
 import {ISpot} from '../../models/interfaces';
 
-const Details = (props : ISpot): JSX.Element => {
+const Details: React.FC<ISpot> = ({name} : ISpot): JSX.Element => {
     return (
         <div>
-            <h1>details</h1>
+            <h1>{name}</h1>
         </div>
     )
 }
