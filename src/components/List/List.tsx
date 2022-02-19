@@ -1,22 +1,14 @@
 import React, {useState} from 'react';
 import { FormControl, InputLabel, MenuItem, Select, Grid, Typography, CircularProgress } from '@material-ui/core';
 import useStyles from './style';
-import {ISpot} from '../../models/interfaces';
+import {IPlace} from '../../models/interfaces';
 import Details from '../Details/Details';
 
-const List = (): JSX.Element => {
+const List = ({places} : any): JSX.Element => {
     const [type, setType] = useState<string>('restaurants');
     const [rating, setRating] = useState<number>(0);
 
     const classes = useStyles();
-
-    const spots = [
-        {name: "Some spot"},
-        {name: "Some spot2"},
-        {name: "Some spot3"},
-        {name: "Some spot4"},
-        {name: "Some spot5"}
-    ];
     
     return (
         <section className={classes.container}>
@@ -42,9 +34,9 @@ const List = (): JSX.Element => {
             </FormControl>
 
             <Grid container spacing={3} className={classes.list}>
-                {spots?.map((spot, idx) => (
+                {places?.map((place: IPlace, idx: React.Key) => (
                     <Grid item key={idx} xs={12}>
-                        <Details {...spot} />
+                        <Details {...place} />
                     </Grid>
                 ))}
             </Grid>
