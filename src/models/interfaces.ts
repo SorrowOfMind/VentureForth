@@ -7,7 +7,7 @@ export interface IPlace {
     location_id: string,
     name: string,
     latitude: string,
-    longitute: string,
+    longitude: string,
     photo: object | any,
     price_level: string,
     ranking: string,
@@ -22,7 +22,8 @@ export interface IPlace {
 export interface IMapProps {
     coords: ICoordinates,
     setCoords: (value: any) => void,
-    setBoundry: (value: any) => void
+    setBoundry: (value: any) => void,
+    places: IPlace[]
 }
 
 export interface IBoundry {

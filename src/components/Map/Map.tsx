@@ -3,12 +3,19 @@ import {Paper, Typography, useMediaQuery} from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import Rating from '@material-ui/lab';
 import useStyles from './style';
-import {IMapProps } from '../../models/interfaces';
+import {IMapProps, IPlace } from '../../models/interfaces';
 import React from 'react';
 
-const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry}): JSX.Element =>  {
+declare module 'react' {
+	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+		lat?: number;
+        lng?: number;
+	}
+}
+
+const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry, places}): JSX.Element =>  {
     const classes = useStyles();
-    const isMobile = useMediaQuery('(min-width: 600px)');
+    const isDesktop = useMediaQuery('(min-width: 600px)');
     return (
         <section className={classes.mapContainer}>
             <GoogleMapReact
@@ -24,7 +31,27 @@ const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry}): JSX.Element 
                 }}
                 // onChildClick={}
             >
-
+                {places?.map((place: IPlace, idx: React.Key) => {
+                    <div 
+                        className={classes.markerContainer} 
+                        lat={Number(place.latitude)}
+                        lng={Number(place.longitude)}
+                        key={idx}
+                    >
+                        { !isDesktop
+                            ? (<LocationOnOutlinedIcon color="primary" fontSize="large" />)
+                            : (<Paper className={classes.paper} elevation={3}>
+                                <Typography variant="subtitle2" gutterBottom>{place.name}</Typography>
+                                <img 
+                                    src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'} 
+                                    alt={place.name} 
+                                    className={classes.pointer}
+                                />
+                            </Paper>)
+                            
+                        }
+                    </div>
+                })}
             </GoogleMapReact>
         </section>
     )

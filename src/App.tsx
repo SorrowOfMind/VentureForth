@@ -34,6 +34,7 @@ const App = (): JSX.Element =>  {
                         coords={coords}
                         setCoords={setCoords}
                         setBoundry={setBoundry}
+                        places={places}
                     />
                 </Grid>
             </Grid>
