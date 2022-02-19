@@ -2,7 +2,7 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   header: {
-      backgroundColor: '#1B1C4C'
+      backgroundColor: '#3CB746'
   },  
   title: {
     display: 'none',
