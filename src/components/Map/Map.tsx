@@ -3,13 +3,14 @@ import {Paper, Typography, useMediaQuery} from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import Rating from '@material-ui/lab';
 import useStyles from './style';
-import { ICoordinates } from '../../models/interfaces';
+import { ICoordinates, IMapProps } from '../../models/interfaces';
+import React from 'react';
 
-const Map = (): JSX.Element =>  {
+const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry}): JSX.Element =>  {
     const classes = useStyles();
     const isMobile = useMediaQuery('(min-width: 600px)');
 
-    const coords: ICoordinates = {lat: 0, lng: 0};
+    // const coords: ICoordinates = {lat: 0, lng: 0};
 
     return (
         <section className={classes.mapContainer}>
@@ -20,7 +21,10 @@ const Map = (): JSX.Element =>  {
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
                 // options={}
-                // onChange={}
+                onChange={(e) => {
+                    setCoords({lat: e.center.lat, lng: e.center.lng});
+                    setBoundry({ne: e.marginBounds.ne, sw: e.marginBounds.sw});
+                }}
                 // onChildClick={}
             >
 

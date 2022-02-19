@@ -19,7 +19,6 @@ const options = {
 export const getPlaces = async () => {
     try {
         const {data: {data}} = await axios.get(url, options);
-        console.log(data);
         return data;
     } catch (err) {
         console.log(err);
