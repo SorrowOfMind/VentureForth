@@ -16,13 +16,15 @@ export interface IPlace {
     address: string,
     phone: string,
     web_url: string,
-    website_url: string
+    website_url: string,
+    rating: string
 }
 
 export interface IMapProps {
     coords: ICoordinates,
     setCoords: (value: any) => void,
     setBoundry: (value: any) => void,
+    setMapClicked: (value: any) => void,
     places: IPlace[]
 }
 

@@ -13,4 +13,9 @@ export default makeStyles(() => ({
   pointer: {
     cursor: 'pointer',
   },
+  test: {
+    backgroundColor: 'red',
+    width: '50px',
+    height: '50px',
+  }
 }));

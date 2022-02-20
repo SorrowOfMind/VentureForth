@@ -6,9 +6,12 @@ import Rating from '@material-ui/lab/Rating';
 import useStyles from './style';
 import {IPlace} from '../../models/interfaces';
 
-const Details: React.FC<IPlace> = (props): JSX.Element => {
+const Details: React.FC<IPlace | any> = (props): JSX.Element => {
     const classes = useStyles();
-    console.log(props);
+
+    if (props.selected)
+        props.refProp?.current?.scrollIntoView({behavior: "smooth", block: "start"});
+    
     return (
         <Card elevation={6}>
             <CardMedia 
@@ -18,6 +21,7 @@ const Details: React.FC<IPlace> = (props): JSX.Element => {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5">{props.name}</Typography>
+                <Rating value={Number(props.rating)} readOnly />
                 <Box display="flex" justifyContent="space-between">
                     <Typography variant="subtitle1">Price</Typography>
                     <Typography gutterBottom variant="subtitle1">{props.price_level}</Typography>
