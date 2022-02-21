@@ -4,9 +4,8 @@ import useStyles from './style';
 import {IPlace} from '../../models/interfaces';
 import Details from '../Details/Details';
 
-const List = ({places, mapClicked, isLoading} : any): JSX.Element => {
-    const [type, setType] = useState<string>('restaurants');
-    const [rating, setRating] = useState<number>(0);
+const List = ({places, mapClicked, isLoading, type, setType, rating, setRating} : any): JSX.Element => {
+   
     const [elementsRefs, setElementsRefs] = useState<Array<any>>([]);
 
     const classes = useStyles();
