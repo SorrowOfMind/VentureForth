@@ -17,7 +17,8 @@ export interface IPlace {
     phone: string,
     web_url: string,
     website_url: string,
-    rating: string
+    rating: string,
+    num_reviews: string | number
 }
 
 export interface IMapProps {
@@ -25,7 +26,8 @@ export interface IMapProps {
     setCoords: (value: any) => void,
     setBoundry: (value: any) => void,
     setMapClicked: (value: any) => void,
-    places: IPlace[]
+    places: IPlace[],
+    weather: any
 }
 
 export interface IBoundry {

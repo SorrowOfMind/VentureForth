@@ -4,12 +4,13 @@ import { CssBaseline, Grid } from '@material-ui/core';
 import TopBar from './components/TopBar/TopBar';
 import Map from './components/Map/Map';
 import List from './components/List/List';
-import {getPlaces} from './api/index';
+import {getPlaces, getWeather} from './api/index';
 import {ICoordinates, IBoundry, IPlace} from './models/interfaces';
 
 const App = (): JSX.Element =>  {
     const [places, setPlaces] = useState<Array<IPlace>>([]);
     const [filteredPlaces, setFilteredPlaces] = useState<Array<IPlace>>([]);
+    const [weather, setWeather] = useState();
     const [mapClicked, setMapClicked] = useState(null);
     const [type, setType] = useState<string>('restaurants');
     const [rating, setRating] = useState<number>(0);
@@ -27,13 +28,16 @@ const App = (): JSX.Element =>  {
     }, [rating]);
 
     useEffect(() => {
-        setIsLoading(true);
-        getPlaces(type, boundry).then(res => {
-            setPlaces(res);
-            setFilteredPlaces([]);
-            setIsLoading(false);
-        });
-    }, [coords, boundry]);
+        if (boundry.sw && boundry.ne){
+            setIsLoading(true);
+            getWeather(coords.lat, coords.lng).then(res => setWeather(res));
+            getPlaces(type, boundry).then(res => {
+                setPlaces(res?.filter((r : IPlace) => r.name && r.num_reviews > 0));
+                setFilteredPlaces([]);
+                setIsLoading(false);
+            });
+        }
+    }, [type, boundry]);
 
     return (
         <>
@@ -57,6 +61,7 @@ const App = (): JSX.Element =>  {
                         setBoundry={setBoundry}
                         setMapClicked = {setMapClicked}
                         places={filteredPlaces.length ? filteredPlaces : places}
+                        weather={weather}
                     />
                 </Grid>
             </Grid>

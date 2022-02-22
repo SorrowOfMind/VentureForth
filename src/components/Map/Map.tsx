@@ -13,7 +13,7 @@ declare module 'react' {
 	}
 }
 
-const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry, places, setMapClicked}): JSX.Element =>  {
+const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry, places, setMapClicked, weather}): JSX.Element =>  {
     const classes = useStyles();
     const isDesktop = useMediaQuery('(min-width: 600px)');
     return (
@@ -24,7 +24,7 @@ const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry, places, setMap
                 center={coords}
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
-                // options={}
+                options={{disableDefaultUI: true, zoomControl: true}}
                 onChange={(e) => {
                     setCoords({lat: e.center.lat, lng: e.center.lng});
                     setBoundry({ne: e.marginBounds.ne, sw: e.marginBounds.sw});
@@ -52,6 +52,11 @@ const Map: React.FC<IMapProps> = ({coords, setCoords, setBoundry, places, setMap
                            )}
                    </div>)
                 )}
+                {weather?.list?.map((data : any, idx : React.Key) => (
+                    <div key={idx} lat={data.coord.lat} lng={data.coord.lon}>
+                        <img src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} />
+                    </div>
+                ))}
             </GoogleMapReact>
         </section>
     )
